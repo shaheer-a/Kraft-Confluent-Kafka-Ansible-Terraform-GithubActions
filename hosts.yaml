@@ -1,0 +1,67 @@
+all:
+  vars:
+    ansible_connection: ssh
+    ansible_become: true
+    kafka_controller_custom_properties:
+      confluent.license: your-license-key
+    kafka_broker_custom_properties:
+      confluent.license: your-license-key
+    schema_registry_custom_properties:
+      confluent.license: your-license-key
+    kafka_connect_custom_properties:
+      confluent.license: your-license-key
+    control_center_custom_properties:
+      confluent.license: your-license-key
+
+kafka_controller:
+  hosts:
+    kafka-controller-1.your-internal-domain:
+      ansible_host: kafka-controller-1.your-internal-domain
+      ansible_user: your-username
+      ansible_ssh_pass: your-password
+      ansible_sudo_pass: your-password
+      ansible_connection: ssh
+      ansible_ssh_common_args: -o StrictHostKeyChecking=no
+
+kafka_broker:
+  hosts:
+    kafka-broker-1.your-internal-domain:
+      ansible_host: kafka-broker-1.your-internal-domain
+      ansible_user: your-username
+      ansible_ssh_pass: your-password
+      ansible_sudo_pass: your-password
+      ansible_connection: ssh
+      ansible_ssh_common_args: -o StrictHostKeyChecking=no
+
+schema_registry:
+  hosts:
+    kafka-schema-registry-1.your-internal-domain:
+      ansible_host: kafka-schema-registry-1.your-internal-domain
+      ansible_user: your-username
+      ansible_ssh_pass: your-password
+      ansible_sudo_pass: your-password
+      ansible_connection: ssh
+      ansible_ssh_common_args: -o StrictHostKeyChecking=no
+
+kafka_connect:
+  hosts:
+    kafka-connect-1.your-internal-domain:
+      ansible_host: kafka-connect-1.your-internal-domain
+      ansible_user: your-username
+      ansible_ssh_pass: your-password
+      ansible_sudo_pass: your-password
+      ansible_connection: ssh
+      ansible_ssh_common_args: -o StrictHostKeyChecking=no
+  vars:
+     kafka_connect_confluent_hub_plugins:
+       - confluentinc/kafka-connect-datagen:latest
+
+control_center:
+  hosts:
+    kafka-control-center-1.your-internal-domain:
+      ansible_host: kafka-control-center-1.your-internal-domain
+      ansible_user: your-username
+      ansible_ssh_pass: your-password
+      ansible_sudo_pass: your-password
+      ansible_connection: ssh
+      ansible_ssh_common_args: -o StrictHostKeyChecking=no
